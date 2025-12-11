@@ -1,12 +1,14 @@
 import { createBrowserRouter } from "react-router";
-import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
+import PrivateRoute from "./PrivateRoute";
+import AddListing from "../pages/AddListing";
+import RootLayout from "../layouts/RootLayout";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <RootLayout></RootLayout>,
     children: [
       {
         index: true,
@@ -21,6 +23,15 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+
+      {
+        path: "/add-listing",
+        element: (
+          <PrivateRoute>
+            <AddListing />
+          </PrivateRoute>
+        ),
       },
     ],
   },
