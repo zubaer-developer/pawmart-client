@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import HomePage from "../pages/HomePage";
+import Home from "../pages/Home";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage></HomePage>,
+        element: <Home></Home>,
       },
 
       {
