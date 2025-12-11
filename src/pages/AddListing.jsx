@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 const AddListing = () => {
   const { user } = useContext(AuthContext);
 
-  const handleAddListing = (event) => {
+  const handleAddListing = async (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -21,6 +21,22 @@ const AddListing = () => {
     };
 
     console.log("Listing Data:", newListing);
+
+    // 🔥 Send to backend
+    const res = await fetch("http://localhost:5000/listings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newListing),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert(" Listing Added Successfully");
+      form.reset();
+    }
   };
 
   return (
