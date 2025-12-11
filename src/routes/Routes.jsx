@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import AddListing from "../pages/AddListing";
 import RootLayout from "../layouts/RootLayout";
+import PetsSupplies from "../pages/PetsSupplies";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
             <AddListing />
           </PrivateRoute>
         ),
+      },
+
+      {
+        path: "/pets-supplies",
+        element: <PetsSupplies />,
       },
     ],
   },
