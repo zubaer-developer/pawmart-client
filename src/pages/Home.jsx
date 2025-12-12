@@ -104,13 +104,14 @@ const Home = () => {
         </Swiper>
       </div>
 
-      {/* --- Category Section --- */}
+      {/* --- 2. Category Section --- */}
       <div className="max-w-7xl mx-auto mb-16">
         <h2 className="text-4xl font-extrabold mb-8 text-center text-neutral">
           Explore Our Pet Ecosystem
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Pets */}
+          {/* Pets (Adoption) */}
           <Link
             to="/category-filtered-product/Pets"
             className="card card-compact bg-base-200 shadow-xl transition duration-300 hover:shadow-2xl hover:bg-base-300 hover:scale-[1.03]"
@@ -124,7 +125,7 @@ const Home = () => {
             </div>
           </Link>
 
-          {/* Food */}
+          {/* Pet Food */}
           <Link
             to="/category-filtered-product/Food"
             className="card card-compact bg-base-200 shadow-xl transition duration-300 hover:shadow-2xl hover:bg-base-300 hover:scale-[1.03]"
@@ -150,7 +151,7 @@ const Home = () => {
             </div>
           </Link>
 
-          {/* Care Products */}
+          {/* Pet Care Products */}
           <Link
             to="/category-filtered-product/CareProducts"
             className="card card-compact bg-base-200 shadow-xl transition duration-300 hover:shadow-2xl hover:bg-base-300 hover:scale-[1.03]"
