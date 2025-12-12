@@ -6,6 +6,9 @@ import PrivateRoute from "./PrivateRoute";
 import AddListing from "../pages/AddListing";
 import RootLayout from "../layouts/RootLayout";
 import PetsSupplies from "../pages/PetsSupplies";
+import MyListings from "../pages/MyListings";
+import UpdateListing from "../pages/UpdateListing";
+import ListingDetails from "../pages/ListingDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +41,29 @@ export const router = createBrowserRouter([
       {
         path: "/pets-supplies",
         element: <PetsSupplies />,
+      },
+
+      {
+        path: "/my-listings",
+        element: (
+          <PrivateRoute>
+            <MyListings />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateListing />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/listing/:id",
+        element: <ListingDetails />,
       },
     ],
   },

@@ -17,7 +17,7 @@ const AddListing = () => {
       description: form.description.value,
       image: form.image.value,
       date: form.date.value,
-      email: user?.email, // logged-in user email
+      email: user?.email,
     };
 
     console.log("Listing Data:", newListing);
