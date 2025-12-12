@@ -4,9 +4,18 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="bg-gray-100 mt-8">
-      <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row justify-between">
+      <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between">
         <div>
-          <h3 className="font-bold text-lg">PawMart</h3>
+          <Link to="/" className="flex normal-case text-xl">
+            <img
+              src="https://i.ibb.co.com/5xf4yfW5/PAWMART-LOGO.webp"
+              alt="logo"
+              className="w-8 h-8"
+            />
+            <span className="text-orange-400">Paw</span>Mart
+          </Link>
+        </div>
+        <div>
           <p className="max-w-md">
             PawMart connects local pet owners and buyers for adoption and pet
             care products.
