@@ -14,10 +14,10 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/all-listings"
+        to="/pets-supplies"
         className="btn btn-ghost text-base font-medium mr-1 rounded-btn"
       >
-        All Listings
+        Pets & Supplies
       </NavLink>
 
       {user?.email && (
@@ -35,10 +35,10 @@ const Navbar = () => {
             My Listings
           </NavLink>
           <NavLink
-            to="/profile"
+            to="/my-orders"
             className="btn btn-ghost text-base font-medium mr-1 rounded-btn"
           >
-            Profile
+            My Orders
           </NavLink>
         </>
       )}
@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div className="w-full bg-base-100 shadow-xl z-50 sticky top-0">
       <div className="navbar max-w-7xl mx-auto px-4">
-        {/*  Mobile Menu & Logo */}
+        {/* Mobile Menu & Logo */}
         <div className="navbar-start">
           {/* Mobile Dropdown Menu */}
           <div className="dropdown">
@@ -77,7 +77,7 @@ const Navbar = () => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/all-listings">All Listings</NavLink>
+                <NavLink to="/pets-supplies">Pets & Supplies</NavLink>
               </li>
               {user?.email && (
                 <>
@@ -88,7 +88,7 @@ const Navbar = () => {
                     <NavLink to="/my-listings">My Listings</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/my-orders">My Orders</NavLink>
                   </li>
                 </>
               )}
@@ -114,24 +114,37 @@ const Navbar = () => {
                   </li>
                 </>
               ) : (
-                <li>
-                  <button
-                    onClick={logoutUser}
-                    className="btn btn-error btn-sm w-full mt-2"
-                  >
-                    Logout
-                  </button>
-                </li>
+                <>
+                  <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                  </li>
+                  <li>
+                    <button
+                      onClick={logoutUser}
+                      className="btn btn-error btn-sm w-full mt-2"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
               )}
             </ul>
           </div>
 
           {/* Logo */}
-          <Link
+          {/* <Link
             to="/"
             className="btn btn-ghost normal-case text-2xl font-extrabold text-primary hover:bg-transparent"
           >
             PET ADOPTION
+          </Link> */}
+          <Link to="/" className="flex normal-case text-xl">
+            <img
+              src="https://i.ibb.co.com/5xf4yfW5/PAWMART-LOGO.webp"
+              alt="logo"
+              className="w-8 h-8"
+            />
+            <span className="text-orange-400">Paw</span>Mart
           </Link>
         </div>
 
@@ -153,9 +166,21 @@ const Navbar = () => {
               </NavLink>
             </>
           ) : (
-            <button onClick={logoutUser} className="btn btn-error">
-              Logout
-            </button>
+            <div className="flex items-center space-x-2">
+              <NavLink
+                to="/profile"
+                className="text-base font-medium rounded-full mr-5"
+              >
+                <div className="avatar">
+                  <div className="w-12 h-12 rounded-full">
+                    <img src={user.photoURL || "/logo192.png"} alt="avatar" />
+                  </div>
+                </div>
+              </NavLink>
+              <button onClick={logoutUser} className="btn btn-error">
+                Logout
+              </button>
+            </div>
           )}
         </div>
       </div>
