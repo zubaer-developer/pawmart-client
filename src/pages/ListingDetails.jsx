@@ -28,7 +28,7 @@ const ListingDetails = () => {
       listingId: listing._id,
       listingName: listing.name,
       price: listing.price,
-      buyer: user.email,
+      email: user.email,
       date: new Date(),
     };
 

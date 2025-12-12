@@ -9,6 +9,7 @@ import PetsSupplies from "../pages/PetsSupplies";
 import MyListings from "../pages/MyListings";
 import UpdateListing from "../pages/UpdateListing";
 import ListingDetails from "../pages/ListingDetails";
+import MyOrders from "../pages/MyOrders";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,11 @@ export const router = createBrowserRouter([
       {
         path: "/listing/:id",
         element: <ListingDetails />,
+      },
+
+      {
+        path: "/my-orders",
+        element: <MyOrders></MyOrders>,
       },
     ],
   },
