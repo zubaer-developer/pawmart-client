@@ -195,17 +195,13 @@ const Home = () => {
                     {listing.name}{" "}
                     <div className="badge badge-primary ml-2">NEW</div>
                   </h3>
-                  <p className="text-sm text-neutral-content">
-                    Category: {listing.category}
-                  </p>
+                  <p className="text-sm">Category: {listing.category}</p>
                   <p className="font-bold text-lg text-success mb-2">
                     {listing.category === "Pets" && listing.price === 0
                       ? "Free for Adoption"
                       : `$${listing.price}`}
                   </p>
-                  <p className="text-sm text-neutral-content mb-2">
-                    Location: {listing.location}
-                  </p>
+                  <p className="text-sm  mb-2">Location: {listing.location}</p>
                   <div className="card-actions justify-end">
                     <Link
                       to={`/listing/${listing._id}`}
@@ -219,6 +215,69 @@ const Home = () => {
             ))}
           </div>
         )}
+      </div>
+
+      {/* ---  Extra Sections --- */}
+      <div className="max-w-7xl mx-auto mb-8">
+        {/* --- Why Adopt Section --- */}
+        <div className="mb-16 p-8 bg-primary/10 rounded-3xl shadow-lg text-center">
+          <h2 className="text-4xl font-extrabold mb-4 text-neutral">
+            Why Adopt from PawMart?
+          </h2>
+          <p className="text-lg  max-w-3xl mx-auto">
+            Adopting a pet from PawMart saves lives and gives loving animals a
+            second chance. Instead of buying, you’re providing a home to a pet
+            in need and supporting responsible adoption practices.
+          </p>
+        </div>
+
+        {/* --- Meet Our Pet Heroes Section --- */}
+        <div className="text-center">
+          <h2 className="text-4xl font-extrabold mb-8 text-neutral">
+            Meet Our Pet Heroes
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                name: "Alice Johnson",
+                role: "Pet Caregiver",
+                image: "https://randomuser.me/api/portraits/women/68.jpg",
+              },
+              {
+                name: "David Smith",
+                role: "Adopter",
+                image: "https://randomuser.me/api/portraits/men/32.jpg",
+              },
+              {
+                name: "Maria Garcia",
+                role: "Volunteer",
+                image: "https://randomuser.me/api/portraits/women/44.jpg",
+              },
+              {
+                name: "John Doe",
+                role: "Pet Foster",
+                image: "https://randomuser.me/api/portraits/men/56.jpg",
+              },
+            ].map((hero, index) => (
+              <div
+                key={index}
+                className="card bg-base-200 shadow-xl hover:shadow-2xl duration-200"
+              >
+                <figure className="h-48 overflow-hidden">
+                  <img
+                    src={hero.image}
+                    alt={hero.name}
+                    className="w-full h-full object-cover"
+                  />
+                </figure>
+                <div className="card-body text-center">
+                  <h3 className="card-title text-2xl">{hero.name}</h3>
+                  <p className="text-sm text-neutral-content">{hero.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

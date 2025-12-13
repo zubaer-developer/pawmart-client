@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import { AuthContext } from "./AuthContext";
 
-// export const AuthContext = createContext(null);
 const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -25,16 +14,33 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
       setUser(loggedUser);
       setLoading(false);
+      console.log(
+        "Auth State Changed. User:",
+        loggedUser ? loggedUser.email : "None"
+      );
     });
 
     return () => unsubscribe();
   }, []);
 
-  const logoutUser = () => {
-    return signOut(auth);
-  };
+  const logoutUser = () => signOut(auth);
 
-  const value = { user, loading, logoutUser };
+  const value = { user, setUser, loading, logoutUser };
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <p>Initial App Loading...</p>
+      </div>
+    );
+  }
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

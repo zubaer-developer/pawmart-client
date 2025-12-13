@@ -70,7 +70,11 @@ export const router = createBrowserRouter([
 
       {
         path: "/my-orders",
-        element: <MyOrders></MyOrders>,
+        element: (
+          <PrivateRoute>
+            <MyOrders></MyOrders>
+          </PrivateRoute>
+        ),
       },
 
       {

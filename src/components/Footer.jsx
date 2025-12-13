@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="bg-gray-100 mt-8">
-      <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between">
+      <div className="mx-auto px-4 py-4 bg-gray-300 flex flex-col md:flex-row justify-between">
         <div>
           <Link to="/" className="flex normal-case text-xl">
             <img
@@ -18,7 +18,9 @@ export default function Footer() {
         <div>
           <p className="max-w-md">
             PawMart connects local pet owners and buyers for adoption and pet
-            care products.
+            care products. PawMart connects local pet owners and buyers for
+            adoption and pet care products. PawMart connects local pet owners
+            and buyers for adoption and pet care products.
           </p>
         </div>
         <div className="mt-4 md:mt-0">
