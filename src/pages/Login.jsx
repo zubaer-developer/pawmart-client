@@ -8,11 +8,12 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const auth = getAuth(app);
 
 const Login = () => {
-  const { setUser } = useContext(AuthContext); // Auth context to update user
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -37,16 +38,31 @@ const Login = () => {
 
       setUser(userData);
 
-      // Save user in DB (optional for email login too)
+      // Save user in DB
       await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
 
-      navigate("/"); // redirect to home
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        text: `Welcome, ${userData.displayName}!`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      navigate("/");
     } catch (err) {
       setError(err.message);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: err.message,
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -58,7 +74,6 @@ const Login = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const firebaseUser = result.user;
-      // ➤ নতুন কনসোল লগ যুক্ত করুন
       console.log("Firebase User Object:", firebaseUser);
 
       // Get proper email from providerData
@@ -67,7 +82,6 @@ const Login = () => {
         firebaseUser.providerData[0]?.email ||
         result._tokenResponse?.email ||
         "";
-      // ➤ নতুন কনসোল লগ যুক্ত করুন
       console.log("Extracted Email:", email);
 
       const userData = {
@@ -76,10 +90,9 @@ const Login = () => {
         email: email,
         photoURL: firebaseUser.photoURL || "",
       };
-      // ➤ নতুন কনসোল লগ যুক্ত করুন
       console.log("Final User Data sent to Context/DB:", userData);
 
-      setUser(userData); // update context
+      setUser(userData);
 
       // Save user in MongoDB
       await fetch("http://localhost:5000/users", {
@@ -88,10 +101,25 @@ const Login = () => {
         body: JSON.stringify(userData),
       });
 
-      navigate("/"); // redirect to home
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        text: `Welcome, ${userData.displayName || "User"}!`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      navigate("/");
     } catch (err) {
       console.log(err);
       setError(err.message);
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Failed",
+        text: err.message,
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
 

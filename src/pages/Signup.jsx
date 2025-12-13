@@ -1,16 +1,39 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const auth = getAuth(app);
 
 const Signup = () => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
+  // COMMON FUNCTIONS
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+    return null; // No error
+  };
+
+  // EMAIL/PASSWORD SIGNUP
+  // ----------------------------------------------------
   const handleSignup = async (event) => {
     event.preventDefault();
     setError("");
@@ -20,21 +43,42 @@ const Signup = () => {
     const password = event.target.password.value;
     const photo = event.target.photo.value;
 
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setError(passwordError);
+      Swal.fire({
+        icon: "error",
+        title: "Validation Error",
+        text: passwordError,
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      return;
+    }
+
     try {
-      //  Firebase Create User
+      // Firebase Create User
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      //  Firebase Profile Update
+      // Firebase Profile Update
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photo,
       });
 
-      //  Backend API Call for Save User in MongoDB
+      const updatedUser = {
+        uid: result.user.uid,
+        displayName: name,
+        email: email,
+        photoURL: photo,
+      };
+      setUser(updatedUser);
+
+      // Backend API Call for Save User in MongoDB
       await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,11 +89,82 @@ const Signup = () => {
         }),
       });
 
-      alert("Signup Successful!");
+      Swal.fire({
+        icon: "success",
+        title: "Signup Successful!",
+        text: "Welcome to PawMart!",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      navigate("/");
     } catch (err) {
       setError(err.message);
+      Swal.fire({
+        icon: "error",
+        title: "Signup Failed",
+        text: err.message,
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
+
+  // GOOGLE SIGNUP
+  // ----------------------------------------------------
+  const handleGoogleSignup = async () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope("email");
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const firebaseUser = result.user;
+
+      // Email Extraction Logic
+      const email =
+        firebaseUser.email ||
+        firebaseUser.providerData[0]?.email ||
+        result._tokenResponse?.email ||
+        "";
+
+      const userData = {
+        uid: firebaseUser.uid,
+        displayName: firebaseUser.displayName || email,
+        email: email,
+        photoURL: firebaseUser.photoURL || "",
+      };
+
+      setUser(userData);
+
+      // Save user in MongoDB
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Signup Successful!",
+        text: "Welcome to PawMart!",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      Swal.fire({
+        icon: "error",
+        title: "Google Signin Failed",
+        text: err.message,
+        timer: 3000,
+        showConfirmButton: false,
+      });
+    }
+  };
+  // ----------------------------------------------------
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
@@ -58,6 +173,16 @@ const Signup = () => {
           <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Create Account
           </h2>
+
+          <button
+            onClick={handleGoogleSignup}
+            type="button"
+            className="btn btn-outline btn-secondary mb-4 w-full"
+          >
+            Continue with Google
+          </button>
+
+          <div className="divider">OR</div>
 
           {/* Name Field */}
           <div className="form-control">
@@ -117,7 +242,6 @@ const Signup = () => {
             </label>
           </div>
 
-          {/* Error Message */}
           {error && (
             <div role="alert" className="alert alert-error mt-4">
               <svg
