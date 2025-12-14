@@ -143,6 +143,8 @@ const Login = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="card w-full max-w-sm shadow-2xl bg-base-100">
+        {/* page title */}
+        <title>Login</title>
         <div className="card-body">
           <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Welcome Back!

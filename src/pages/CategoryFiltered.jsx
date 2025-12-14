@@ -42,6 +42,8 @@ const CategoryFiltered = () => {
 
   return (
     <div className="min-h-screen bg-base-100 p-4">
+      {/* page title */}
+      <title>Listings</title>
       <h2 className="text-4xl font-extrabold mb-8 text-center text-neutral">
         {categoryName} Listings
       </h2>
@@ -61,12 +63,8 @@ const CategoryFiltered = () => {
             </figure>
             <div className="card-body p-6">
               <h3 className="card-title text-2xl">{item.name}</h3>
-              <p className="text-sm text-neutral-content">
-                Category: {item.category}
-              </p>
-              <p className="text-sm text-neutral-content">
-                Location: {item.location}
-              </p>
+              <p className="text-sm">Category: {item.category}</p>
+              <p className="text-sm">Location: {item.location}</p>
               <p className="font-bold text-lg text-success mb-2">
                 Price: {item.price ? `$${item.price}` : "Free for Adoption"}
               </p>

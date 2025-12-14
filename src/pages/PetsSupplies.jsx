@@ -35,6 +35,8 @@ const PetsSupplies = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* page title */}
+      <title>Pets Supplies</title>
       <h1 className="text-3xl font-bold text-center mb-8">Pets & Supplies</h1>
 
       {/* Filters */}

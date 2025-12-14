@@ -56,6 +56,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-base-100 p-4">
+      {/* page title */}
+      <title>HOME</title>
       {/* Banner Section (Swiper) */}
       <div className="min-h-[400px] rounded-3xl shadow-xl overflow-hidden mb-12 relative">
         <Swiper
@@ -119,9 +121,7 @@ const Home = () => {
             <div className="card-body items-center text-center">
               <h3 className="text-4xl mb-2">🐶</h3>
               <h3 className="card-title text-2xl">Pets Adoption</h3>
-              <p className="text-sm text-neutral-content">
-                Ready for a loving home.
-              </p>
+              <p className="text-sm text-neutral">Ready for a loving home.</p>
             </div>
           </Link>
 
@@ -133,9 +133,7 @@ const Home = () => {
             <div className="card-body items-center text-center">
               <h3 className="text-4xl mb-2">🍖</h3>
               <h3 className="card-title text-2xl">Pet Food</h3>
-              <p className="text-sm text-neutral-content">
-                Healthy & Nutritious.
-              </p>
+              <p className="text-sm text-neutral">Healthy & Nutritious.</p>
             </div>
           </Link>
 
@@ -147,7 +145,7 @@ const Home = () => {
             <div className="card-body items-center text-center">
               <h3 className="text-4xl mb-2">🧸</h3>
               <h3 className="card-title text-2xl">Accessories</h3>
-              <p className="text-sm text-neutral-content">Toys & Essentials.</p>
+              <p className="text-sm text-neutral">Toys & Essentials.</p>
             </div>
           </Link>
 
@@ -159,9 +157,7 @@ const Home = () => {
             <div className="card-body items-center text-center">
               <h3 className="text-4xl mb-2">💊</h3>
               <h3 className="card-title text-2xl">Pet Care</h3>
-              <p className="text-sm text-neutral-content">
-                Products & Supplies.
-              </p>
+              <p className="text-sm text-neutral">Products & Supplies.</p>
             </div>
           </Link>
         </div>

@@ -112,6 +112,8 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-6xl mx-auto mt-8">
+      {/* page title */}
+      <title>My Orders</title>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">My Orders</h1>
         <div className="flex gap-2">

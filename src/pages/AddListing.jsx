@@ -57,6 +57,8 @@ const AddListing = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
+      {/* page title */}
+      <title>Add Listing</title>
       <h1 className="text-3xl font-bold text-center mb-6">Add New Listing</h1>
 
       <form onSubmit={handleAddListing} className="space-y-4">

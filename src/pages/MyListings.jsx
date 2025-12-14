@@ -43,6 +43,8 @@ const MyListings = () => {
 
   return (
     <div className="max-w-4xl mx-auto mt-8">
+      {/* page title */}
+      <title>My Listing</title>
       <h1 className="text-3xl font-bold text-center mb-6">My Listings</h1>
 
       <div className="overflow-x-auto">

@@ -68,6 +68,8 @@ const UpdateListing = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
+      {/* page title */}
+      <title>Update Listing</title>
       <h1 className="text-3xl font-bold text-center mb-6">Update Listing</h1>
 
       <form onSubmit={handleUpdate} className="space-y-4">

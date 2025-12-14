@@ -47,6 +47,8 @@ const ListingDetails = () => {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 my-10">
+      {/* page title */}
+      <title>Listing Details</title>
       <img src={listing.image} alt="" className="w-full rounded-lg" />
 
       <h1 className="text-3xl font-bold">{listing.name}</h1>

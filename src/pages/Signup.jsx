@@ -196,6 +196,8 @@ const Signup = () => {
       transition={{ type: "tween", duration: 0.5 }}
     >
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
+        {/* page title */}
+        <title>SignUp</title>
         <form onSubmit={handleSignup} className="card-body">
           <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Create Account

@@ -11,10 +11,14 @@ import UpdateListing from "../pages/UpdateListing";
 import ListingDetails from "../pages/ListingDetails";
 import MyOrders from "../pages/MyOrders";
 import CategoryFiltered from "../pages/CategoryFiltered";
+import ErrorPage from "../pages/ErrorPage";
+// import ErrorPage from "../pages/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    // errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

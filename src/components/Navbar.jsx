@@ -104,7 +104,11 @@ const Navbar = () => {
                   onClick={toggleTheme}
                   className="btn btn-ghost btn-sm w-full"
                 >
-                  {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+                  {theme === "light" ? (
+                    <BsFillMoonFill className="h-5 w-5" />
+                  ) : (
+                    <BsFillSunFill className="h-5 w-5 text-yellow-500" />
+                  )}
                 </button>
               </li>
 
