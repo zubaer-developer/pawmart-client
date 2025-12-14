@@ -1,47 +1,40 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PetsSupplies = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Temporary Dummy Data
-  const demoListings = [
-    {
-      id: 1,
-      name: "Golden Retriever Puppy",
-      category: "Pets",
-      price: 0,
-      location: "Dhaka",
-      image: "https://placekitten.com/400/260",
-    },
-    {
-      id: 2,
-      name: "Cat Food Premium",
-      category: "Food",
-      price: 450,
-      location: "Chattogram",
-      image: "https://placekitten.com/400/250",
-    },
-    {
-      id: 3,
-      name: "Pet Toy Ball",
-      category: "Accessories",
-      price: 120,
-      location: "Sylhet",
-      image: "https://placekitten.com/400/270",
-    },
-  ];
+  // Fetch listings from server
+  useEffect(() => {
+    fetch("http://localhost:5000/listings")
+      .then((res) => res.json())
+      .then((data) => {
+        setListings(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   // Search + Filter
-  const filteredListings = demoListings.filter((item) => {
-    const matchName = item.name.toLowerCase().includes(search.toLowerCase());
+  const filteredListings = listings.filter((item) => {
+    const matchName = item.name?.toLowerCase().includes(search.toLowerCase());
     const matchCategory = filter === "All" ? true : item.category === filter;
     return matchName && matchCategory;
   });
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Pets & Supplies</h1>
 
       {/* Filters */}
@@ -69,35 +62,41 @@ const PetsSupplies = () => {
         </select>
       </div>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {filteredListings.map((item) => (
-          <div
-            key={item.id}
-            className="p-5 bg-base-100 shadow rounded-xl hover:shadow-lg duration-200"
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="rounded mb-4 w-full h-48 object-cover"
-            />
-            <h3 className="text-xl font-bold">{item.name}</h3>
-            <p className="text-sm mb-1">Category: {item.category}</p>
-            <p className="text-sm mb-1">Location: {item.location}</p>
-            <p className="font-semibold mb-2">
-              Price:{" "}
-              {item.price === 0 ? "Free (Adoption)" : item.price + " BDT"}
-            </p>
-
-            <Link
-              to={`/listing/${item.id}`}
-              className="btn btn-primary btn-sm mt-2"
+      {/* Listings */}
+      {filteredListings.length === 0 ? (
+        <p className="text-center text-gray-500">No listings found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {filteredListings.map((item) => (
+            <div
+              key={item._id}
+              className="p-5 bg-base-100 shadow rounded-xl hover:shadow-lg duration-200"
             >
-              See Details
-            </Link>
-          </div>
-        ))}
-      </div>
+              <img
+                src={item.image}
+                alt={item.name}
+                className="rounded mb-4 w-full h-48 object-cover"
+              />
+              <h3 className="text-xl font-bold">{item.name}</h3>
+              <p className="text-sm mb-1">Category: {item.category}</p>
+              <p className="text-sm mb-1">Location: {item.location}</p>
+              <p className="font-semibold mb-2">
+                Price:{" "}
+                {item.price === 0 || item.price === "0"
+                  ? "Free (Adoption)"
+                  : `${item.price} BDT`}
+              </p>
+
+              <Link
+                to={`/listing/${item._id}`}
+                className="btn btn-primary btn-sm mt-2 w-full"
+              >
+                See Details
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
