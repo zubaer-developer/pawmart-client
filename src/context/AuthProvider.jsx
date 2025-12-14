@@ -12,7 +12,34 @@ const AuthProvider = ({ children }) => {
   // Firebase observer — keeps user logged in on reload
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-      setUser(loggedUser);
+      if (loggedUser) {
+        let extractedEmail = loggedUser.email;
+
+        if (!extractedEmail && loggedUser.providerData) {
+          const googleProvider = loggedUser.providerData.find(
+            (p) => p.providerId === "google.com"
+          );
+          if (googleProvider && googleProvider.email) {
+            extractedEmail = googleProvider.email;
+          }
+        }
+
+        const customUserData = {
+          uid: loggedUser.uid,
+          displayName: loggedUser.displayName || extractedEmail || "User",
+          email: extractedEmail || "",
+          photoURL: loggedUser.photoURL || "",
+        };
+
+        console.log(
+          "AuthProvider: User state loaded/refreshed:",
+          customUserData.email
+        );
+        setUser(customUserData);
+      } else {
+        console.log("AuthProvider: No user found.");
+        setUser(null);
+      }
       setLoading(false);
       console.log(
         "Auth State Changed. User:",

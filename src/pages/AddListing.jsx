@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const AddListing = () => {
 
     console.log("Listing Data:", newListing);
 
-    // 🔥 Send to backend
+    // Send to backend
     const res = await fetch("http://localhost:5000/listings", {
       method: "POST",
       headers: {
@@ -34,8 +35,23 @@ const AddListing = () => {
     const data = await res.json();
 
     if (data.success) {
-      alert(" Listing Added Successfully");
+      Swal.fire({
+        icon: "success",
+        title: "Listing Added Successfully!",
+        text: `${newListing.name} is now available on PawMart.`,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
       form.reset();
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Add Listing",
+        text: data.message || "Something went wrong.",
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
 

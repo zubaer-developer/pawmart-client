@@ -132,12 +132,7 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          {/* <Link
-            to="/"
-            className="btn btn-ghost normal-case text-2xl font-extrabold text-primary hover:bg-transparent"
-          >
-            PET ADOPTION
-          </Link> */}
+
           <Link to="/" className="flex normal-case text-xl">
             <img
               src="https://i.ibb.co.com/5xf4yfW5/PAWMART-LOGO.webp"
