@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { ThemeContext } from "../context/ThemeContext";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const navItems = (
     <>
@@ -72,13 +75,13 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52"
             >
-              {/* Main Nav Items */}
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
                 <NavLink to="/pets-supplies">Pets & Supplies</NavLink>
               </li>
+
               {user?.email && (
                 <>
                   <li>
@@ -92,8 +95,21 @@ const Navbar = () => {
                   </li>
                 </>
               )}
+
               <div className="divider my-1"></div>
-              {/* Auth Links/Button */}
+
+              {/* Theme Toggle (Mobile) */}
+              <li>
+                <button
+                  onClick={toggleTheme}
+                  className="btn btn-ghost btn-sm w-full"
+                >
+                  {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+                </button>
+              </li>
+
+              <div className="divider my-1"></div>
+
               {!user?.email ? (
                 <>
                   <li>
@@ -132,7 +148,6 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-
           <Link to="/" className="flex normal-case text-xl">
             <img
               src="https://i.ibb.co.com/5xf4yfW5/PAWMART-LOGO.webp"
@@ -147,7 +162,20 @@ const Navbar = () => {
           <div className="flex items-center space-x-1">{navItems}</div>
         </div>
 
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar-end hidden lg:flex items-center space-x-2">
+          {/* Theme Toggle (Desktop) */}
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost btn-circle"
+            title="Toggle Theme"
+          >
+            {theme === "light" ? (
+              <BsFillMoonFill className="h-5 w-5" />
+            ) : (
+              <BsFillSunFill className="h-5 w-5 text-yellow-500" />
+            )}
+          </button>
+
           {!user?.email ? (
             <>
               <NavLink
