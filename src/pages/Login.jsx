@@ -9,6 +9,9 @@ import {
 import { app } from "../firebase/firebase.config";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import { Tooltip } from "react-tooltip";
 
 const auth = getAuth(app);
 
@@ -123,21 +126,40 @@ const Login = () => {
     }
   };
 
+  // Framer motion
+  const motionVariants = {
+    initial: { opacity: 0, y: 50, scale: 0.95 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: -50, scale: 0.95 },
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
+    <motion.div
+      className="min-h-screen flex items-center justify-center bg-base-200 p-4"
+      variants={motionVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="card w-full max-w-sm shadow-2xl bg-base-100">
         <div className="card-body">
           <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Welcome Back!
           </h2>
 
-          {/* Google Login */}
+          {/* Google Login with React Tooltip*/}
           <button
             onClick={handleGoogleLogin}
             className="btn btn-outline btn-secondary mb-4 w-full"
+            data-tooltip-id="google-tip"
+            data-tooltip-content="Sign in securely using your Google account."
+            data-tooltip-place="bottom"
           >
             Continue with Google
           </button>
+
+          <Tooltip id="google-tip" />
 
           <div className="divider">OR</div>
 
@@ -162,6 +184,8 @@ const Login = () => {
                 <a
                   href="#"
                   className="label-text-alt link link-hover text-red-300"
+                  data-tooltip-id="forgot-pass-tip"
+                  data-tooltip-content="Contact admin if you forget the password"
                 >
                   Forgot password?
                 </a>
@@ -174,6 +198,8 @@ const Login = () => {
                 required
               />
             </div>
+
+            <Tooltip id="forgot-pass-tip" />
 
             {error && (
               <div role="alert" className="alert alert-error mt-4">
@@ -201,7 +227,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

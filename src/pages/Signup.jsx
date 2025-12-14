@@ -10,6 +10,9 @@ import { app } from "../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import { Tooltip } from "react-tooltip";
 
 const auth = getAuth(app);
 
@@ -29,7 +32,7 @@ const Signup = () => {
     if (!/[a-z]/.test(password)) {
       return "Password must contain at least one lowercase letter.";
     }
-    return null; // No error
+    return null;
   };
 
   // EMAIL/PASSWORD SIGNUP
@@ -166,21 +169,50 @@ const Signup = () => {
   };
   // ----------------------------------------------------
 
+  // ANIMATION VARIANTS
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      y: 50,
+    },
+    in: {
+      opacity: 1,
+      y: 0,
+    },
+    out: {
+      opacity: 0,
+      y: -50,
+    },
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
+    // Framer Motion
+    <motion.div
+      className="min-h-screen flex items-center justify-center bg-base-200 p-4"
+      variants={pageVariants}
+      initial="initial"
+      animate="in"
+      exit="out"
+      transition={{ type: "tween", duration: 0.5 }}
+    >
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
         <form onSubmit={handleSignup} className="card-body">
           <h2 className="text-3xl font-bold text-center text-primary mb-6">
             Create Account
           </h2>
 
+          {/* Google Signup Button with React Tooltip */}
           <button
             onClick={handleGoogleSignup}
             type="button"
             className="btn btn-outline btn-secondary mb-4 w-full"
+            data-tooltip-id="google-tip"
+            data-tooltip-content="Quick and easy sign up with Google."
+            data-tooltip-place="bottom"
           >
             Continue with Google
           </button>
+          <Tooltip id="google-tip" />
 
           <div className="divider">OR</div>
 
@@ -212,10 +244,16 @@ const Signup = () => {
             />
           </div>
 
-          {/* Password Field */}
+          {/* Password Field with Tooltip */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span
+                className="label-text"
+                data-tooltip-id="password-req-tip"
+                data-tooltip-content="Min 6 chars, must include uppercase and lowercase." // Tooltip Content
+              >
+                Password
+              </span>
             </label>
             <input
               name="password"
@@ -225,6 +263,7 @@ const Signup = () => {
               required
             />
           </div>
+          <Tooltip id="password-req-tip" />
 
           {/* Photo URL Field */}
           <div className="form-control">
@@ -278,7 +317,7 @@ const Signup = () => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
