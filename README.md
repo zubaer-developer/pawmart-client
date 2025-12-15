@@ -1,16 +1,50 @@
-# React + Vite
+# PawMart — Pet Adoption & Supply Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Website:** https://game-hub-419f6.web.app/
 
-Currently, two official plugins are available:
+PawMart is a community-driven web platform where pet owners, breeders, and shops can list pets for adoption or sell pet-related products such as food, toys, accessories, and care items. Users can browse listings, view details, and place adoption or purchase orders easily.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Pet Adoption & Product Listings**  
+  Users can explore pets for adoption and pet-related products in a clean 3-column grid layout.
 
-## Expanding the ESLint configuration
+- **Secure Authentication System**  
+  Firebase Authentication with Email/Password and Google Login for a smooth and secure user experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Add & Manage said**  
+  Logged-in users can add new listings, update their own listings, and delete them with confirmation.
+
+- **Order & Adoption System**  
+  Users can place adoption or purchase orders through a modal form, and all orders are saved securely in MongoDB.
+
+- **My Orders & PDF Report**  
+  Logged-in users can view their own orders in a table format and download the order history as a PDF report.
+
+- **Fully Responsive Design**  
+  Optimized for mobile, tablet, and desktop devices using Tailwind CSS and DaisyUI.
+
+---
+
+## Technologies Used
+
+- **Frontend:** React, React Router, Tailwind CSS, DaisyUI
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** Firebase Authentication
+- **Deployment:** Netlify (Client), Vercel (Server)
+
+---
+
+## Project Purpose
+
+The goal of PawMart is to encourage pet adoption and make pet care products easily accessible through a user-friendly and modern web application.
+
+---
+
+## Contact
+
+If you have any feedback or suggestions, feel free to reach out.  
+Happy coding!
