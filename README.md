@@ -34,7 +34,7 @@ PawMart is a community-driven web platform where pet owners, breeders, and shops
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** Firebase Authentication
-- **Deployment:** Netlify (Client), Vercel (Server)
+- **Deployment:** Firebase (Client), Vercel (Server)
 
 ---
 
