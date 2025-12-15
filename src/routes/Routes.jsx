@@ -12,6 +12,7 @@ import ListingDetails from "../pages/ListingDetails";
 import MyOrders from "../pages/MyOrders";
 import CategoryFiltered from "../pages/CategoryFiltered";
 import ErrorPage from "../pages/ErrorPage";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,15 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
 
       {
