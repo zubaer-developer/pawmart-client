@@ -36,15 +36,6 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/profile",
-        element: (
-          <PrivateRoute>
-            <Profile></Profile>
-          </PrivateRoute>
-        ),
-      },
-
-      {
         path: "/add-listing",
         element: (
           <PrivateRoute>
@@ -93,6 +84,11 @@ export const router = createBrowserRouter([
       {
         path: "/category-filtered-product/:categoryName",
         element: <CategoryFiltered></CategoryFiltered>,
+      },
+
+      {
+        path: "/profile",
+        element: <Profile></Profile>,
       },
     ],
   },
