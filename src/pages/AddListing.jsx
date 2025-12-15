@@ -24,13 +24,16 @@ const AddListing = () => {
     console.log("Listing Data:", newListing);
 
     // Send to backend
-    const res = await fetch("http://localhost:5000/listings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newListing),
-    });
+    const res = await fetch(
+      "https://pawmart-server-github.vercel.app/listings",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newListing),
+      }
+    );
 
     const data = await res.json();
 

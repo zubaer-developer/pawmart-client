@@ -9,7 +9,7 @@ const PetsSupplies = () => {
 
   // Fetch listings from server
   useEffect(() => {
-    fetch("http://localhost:5000/listings")
+    fetch("https://pawmart-server-github.vercel.app/listings")
       .then((res) => res.json())
       .then((data) => {
         setListings(data);

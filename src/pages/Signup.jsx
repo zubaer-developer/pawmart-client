@@ -82,7 +82,7 @@ const Signup = () => {
       setUser(updatedUser);
 
       // Backend API Call for Save User in MongoDB
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://pawmart-server-github.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -140,7 +140,7 @@ const Signup = () => {
       setUser(userData);
 
       // Save user in MongoDB
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://pawmart-server-github.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),

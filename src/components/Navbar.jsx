@@ -98,7 +98,7 @@ const Navbar = () => {
 
               <div className="divider my-1"></div>
 
-              {/* Theme Toggle (Mobile) */}
+              {/* Theme Toggle */}
               <li>
                 <button
                   onClick={toggleTheme}
@@ -167,7 +167,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end hidden lg:flex items-center space-x-2">
-          {/* Theme Toggle (Desktop) */}
+          {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
             className="btn btn-ghost btn-circle"

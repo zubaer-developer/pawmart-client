@@ -35,7 +35,9 @@ const Home = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const res = await fetch("http://localhost:5000/listings");
+        const res = await fetch(
+          "https://pawmart-server-github.vercel.app/listings"
+        );
         const data = await res.json();
 
         // Sort descending by creation (_id) and take latest 6

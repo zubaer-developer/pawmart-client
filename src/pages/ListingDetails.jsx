@@ -11,7 +11,7 @@ const ListingDetails = () => {
   const [listing, setListing] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/listings/${id}`)
+    fetch(`https://pawmart-server-github.vercel.app/listings/${id}`)
       .then((res) => res.json())
       .then((data) => setListing(data));
   }, [id]);
@@ -32,7 +32,7 @@ const ListingDetails = () => {
       date: new Date(),
     };
 
-    fetch("http://localhost:5000/orders", {
+    fetch("https://pawmart-server-github.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

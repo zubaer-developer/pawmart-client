@@ -18,7 +18,7 @@ const MyOrders = () => {
     }
 
     setLoading(true);
-    fetch(`http://localhost:5000/orders/user/${user.email}`)
+    fetch(`https://pawmart-server-github.vercel.app/orders/user/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setOrders(data || data.data || []);
@@ -41,7 +41,9 @@ const MyOrders = () => {
     }).then((result) => {
       if (!result.isConfirmed) return;
 
-      fetch(`http://localhost:5000/orders/${id}`, { method: "DELETE" })
+      fetch(`https://pawmart-server-github.vercel.app/orders/${id}`, {
+        method: "DELETE",
+      })
         .then((res) => res.json())
         .then((data) => {
           const deletedCount =

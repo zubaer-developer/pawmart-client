@@ -11,7 +11,7 @@ const UpdateListing = () => {
 
   // Load Single Listing
   useEffect(() => {
-    fetch(`http://localhost:5000/listings/${id}`)
+    fetch(`https://pawmart-server-github.vercel.app/listings/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setListing(data);
@@ -40,7 +40,7 @@ const UpdateListing = () => {
       date: form.date.value,
     };
 
-    fetch(`http://localhost:5000/listings/${id}`, {
+    fetch(`https://pawmart-server-github.vercel.app/listings/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

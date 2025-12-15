@@ -11,9 +11,11 @@ const MyListings = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/listings/user/${user.email}`)
+    fetch(
+      `https://pawmart-server-github.vercel.app/listings/user/${user.email}`
+    )
       .then((res) => res.json())
-      .then((data) => setListings(data.data));
+      .then((data) => setListings(data.data || data || []));
   }, [user?.email]);
 
   const handleDelete = (id) => {
@@ -25,7 +27,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/listings/${id}`, {
+        fetch(`https://pawmart-server-github.vercel.app/listings/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

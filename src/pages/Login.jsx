@@ -42,7 +42,7 @@ const Login = () => {
       setUser(userData);
 
       // Save user in DB
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://pawmart-server-github.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -98,7 +98,7 @@ const Login = () => {
       setUser(userData);
 
       // Save user in MongoDB
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://pawmart-server-github.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),

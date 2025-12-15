@@ -11,7 +11,7 @@ const CategoryFiltered = () => {
     const fetchListings = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/listings/category/${categoryName}`
+          `https://pawmart-server-github.vercel.app/listings/category/${categoryName}`
         );
         setListings(res.data);
       } catch (error) {
